@@ -78,8 +78,5 @@ createApp({
     },
     mounted(){
         this.autoplay = setInterval(this.goToNextSlide, 3000)
-        // setInterval(()=> {
-        //     this.goToNextSlide();
-        // }, 3000)
     }
 }).mount('#app')
