@@ -1,3 +1,17 @@
+/*
+
+Descrizione:
+Partendo dal markup della versione svolta in js plain, 
+rifare lo slider ma questa volta usando Vue.
+
+Bonus:
+1 - al click su una thumb, visualizzare in grande l'immagine corrispondente
+2 - applicare l'autoplay allo slider: ogni 3 secondi, cambia immagine automaticamente
+3 - quando il mouse va in hover sullo slider, bloccare l'autoplay e farlo riprendere quando esce
+
+*/
+
+
 const { createApp } = Vue;
 
 createApp({
@@ -30,7 +44,8 @@ createApp({
                         title: "Marvel's Avengers",
                         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
                     }
-                ]
+                ],
+            autoplay : null    
         }
     },
     methods: {
@@ -50,5 +65,21 @@ createApp({
             this.counterActiveSlide = 0
             } 
         },
+        changeActiveSlide(i){
+            this.counterActiveSlide = i
+        },
+        handleOverSlider(){
+            clearInterval(this.autoplay)
+            this.autoplay = null
+        },
+        handleLeaveSlider(){
+            this.autoplay = setInterval(this.goToNextSlide, 3000)
+        }
+    },
+    mounted(){
+        this.autoplay = setInterval(this.goToNextSlide, 3000)
+        // setInterval(()=> {
+        //     this.goToNextSlide();
+        // }, 3000)
     }
 }).mount('#app')
